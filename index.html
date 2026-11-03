@@ -1,0 +1,331 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PSH ARCADE</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+
+        <h1>Tic-Tac-Toe</h1>
+
+        <div class="loading-bar">
+            <div id="progress"></div>
+        </div>
+
+        <p>Loading...</p>
+
+    </div>
+
+
+    <!-- Main Menu -->
+    <div id="main-menu" class="hidden">
+
+        <h1>Tic-Tac-Toe</h1>
+
+        <button id="play-friend">Play Online</button>
+
+        <button id="test-board">Play Offline</button>
+
+        <button id="play-computer">Play vs Computer</button>
+
+    </div>
+
+
+    <!-- Friend Menu -->
+    <div id="friend-menu" class="hidden">
+
+        <p class="game-label">PSH ARCADE</p>
+
+        <h1>Play with a Friend</h1>
+
+        <button id="create-room">Create a Room</button>
+
+        <button id="join-room">Join a Room</button>
+
+        <button id="back-friend">Back</button>
+
+    </div>
+
+
+    <!-- Computer Mode Screen -->
+    <div id="computer-screen" class="hidden">
+
+        <p class="game-label">PSH ARCADE</p>
+
+        <h1>Play with Computer</h1>
+
+        <p>Choose your challenge</p>
+
+        <p id="computer-message"></p>
+
+        <button id="easy">Easy</button>
+
+        <button id="medium">Medium</button>
+
+        <button id="hard">Hard</button>
+
+        <button id="back-computer">BACK</button>
+
+    </div>
+
+
+    <!-- Symbol Selection Screen -->
+    <div id="symbol-screen" class="hidden">
+
+        <p class="game-label">PSH ARCADE</p>
+
+        <h1>CHOOSE YOUR SIDE</h1>
+
+        <p>Which symbol will you play as?</p>
+
+        <div id="symbol-options">
+
+            <button class="symbol-choice" id="choose-x">
+                <span class="choice-symbol">X</span>
+                <span class="choice-label">PLAY AS X</span>
+            </button>
+
+            <button class="symbol-choice" id="choose-o">
+                <span class="choice-symbol">O</span>
+                <span class="choice-label">PLAY AS O</span>
+            </button>
+
+        </div>
+
+        <p id="symbol-message">
+            X starts first. Choose O and the computer starts.
+        </p>
+
+        <button id="back-symbol">Back</button>
+
+    </div>
+
+
+    <!-- Create / Join Room Lobby -->
+    <div id="create-screen" class="hidden">
+
+        <p class="game-label">PSH ARCADE</p>
+
+        <h1>Your Room</h1>
+
+        <p id="lobby-subtitle">Share this code with your friend</p>
+
+        <!-- Room Code -->
+        <div class="code-box">
+
+            <p class="room-code-label">ROOM CODE</p>
+
+            <h2 id="room-code"></h2>
+
+            <p id="room-status" aria-live="polite">
+                Connecting to Firebase...
+            </p>
+
+            <button id="copy-code">Copy Room Code</button>
+
+        </div>
+
+
+        <!-- Player Cards -->
+        <div id="lobby-players">
+
+            <!-- Host -->
+            <div class="player-box">
+
+                <span id="host-symbol" class="lobby-symbol">X</span>
+
+                <h3 id="host-name">YOU</h3>
+
+                <span id="host-badge" class="player-badge host-badge">
+                    HOST
+                </span>
+
+            </div>
+
+
+            <!-- Guest -->
+            <div class="player-box">
+
+                <span id="guest-symbol" class="lobby-symbol">O</span>
+
+                <h3 id="guest-name">YOUR FRIEND</h3>
+
+                <span id="friend-status" class="player-badge waiting-badge">
+                    WAITING
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Lobby Message -->
+        <p id="lobby-message" aria-live="polite">
+            Your friend hasn't joined yet.
+        </p>
+
+
+        <button id="start-game" disabled>
+            START GAME
+        </button>
+
+        <button id="back-create">
+            BACK
+        </button>
+
+    </div>
+
+
+    <!-- Join Room Screen -->
+    <div id="join-screen" class="hidden">
+
+        <p class="game-label">PSH ARCADE</p>
+
+        <h1>Join a Room</h1>
+
+        <p>Enter your friend's room code</p>
+
+        <input
+    type="text"
+    id="join-code"
+    maxlength="6"
+    placeholder="Enter room code"
+    
+>
+
+        <p id="join-status" aria-live="polite"></p>
+
+        <button id="submit-code" disabled>
+            JOIN ROOM
+        </button>
+
+        <button id="back-join">BACK</button>
+
+    </div>
+
+  <!-- Waiting for Host Screen -->
+<div id="join-wait-screen" class="hidden">
+
+    <p class="game-label">PSH ARCADE</p>
+
+    <h1>You're In!</h1>
+
+    <p>You've successfully joined the room.</p>
+
+    <div class="code-box">
+        <p class="room-code-label">ROOM STATUS</p>
+        <h2>CONNECTED</h2>
+        <p id="waiting-message">
+            Waiting for the host to start the game...
+        </p>
+    </div>
+
+</div>
+
+  <!-- Game Screen -->
+    <div id="game-screen" class="hidden">
+
+        <p class="game-label">PSH ARCADE</p>
+
+        <h1>PSH ARCADE</h1>
+
+        <div id="player-cards">
+
+            <div class="player-card active-player" id="player-x">
+
+                <span class="player-symbol">X</span>
+
+                <span class="player-name">PLAYER 1</span>
+
+            </div>
+
+            <div class="player-card" id="player-o">
+
+                <span class="player-symbol">O</span>
+
+                <span class="player-name">PLAYER 2</span>
+
+            </div>
+
+        </div>
+
+        <p id="turn-message" aria-live="polite">X's turn</p>
+
+
+        <!-- Game Board -->
+        <div id="game-board">
+
+            <button class="cell" data-index="0"></button>
+            <button class="cell" data-index="1"></button>
+            <button class="cell" data-index="2"></button>
+
+            <button class="cell" data-index="3"></button>
+            <button class="cell" data-index="4"></button>
+            <button class="cell" data-index="5"></button>
+
+            <button class="cell" data-index="6"></button>
+            <button class="cell" data-index="7"></button>
+            <button class="cell" data-index="8"></button>
+
+            <svg id="winning-line" viewBox="0 0 300 300">
+
+                <line
+                    id="win-line"
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="0"
+                />
+
+            </svg>
+
+        </div>
+
+
+        <!-- Victory Overlay -->
+        <div id="victory-overlay" class="hidden">
+
+            <div id="victory-card">
+
+                <p class="victory-label">PSH ARCADE</p>
+
+                <div id="victory-symbol"></div>
+
+                <h2 id="victory-title">X WINS!</h2>
+
+                <p id="victory-subtitle">
+                    VICTORY IS YOURS
+                </p>
+
+                <p id="game-message"></p>
+
+                <button id="rematch-button">
+                    REMATCH
+                </button>
+
+                <button id="back-game">
+                    BACK TO MENU
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script type="module" src="script.js"></script>
+
+</body>
+
+</html>

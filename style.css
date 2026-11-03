@@ -1,0 +1,1567 @@
+
+/* General settings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #12121a;
+    color: #eeeeee;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+}
+
+/* Hide elements */
+.hidden {
+    display: none !important;
+}
+
+#loading-screen,
+#main-menu,
+#friend-menu,
+#computer-screen,
+#symbol-screen {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    padding: 20px;
+}
+
+/* Title */
+h1 {
+    font-size: clamp(32px, 8vw, 48px);
+    color: #b9a0ff;
+    text-align: center;
+}
+
+/* Loading bar background */
+.loading-bar {
+    width: 80%;
+    max-width: 300px;
+    height: 8px;
+    background-color: #302b40;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/* Loading progress */
+#progress {
+    width: 65%;
+    height: 100%;
+    background-color: #b9a0ff;
+    border-radius: 20px;
+    box-shadow: 0 0 12px #b9a0ff;
+}
+
+/* Loading text */
+#loading-screen p {
+    color: #aaa0bc;
+    font-size: 16px;
+}
+
+/* Menu buttons */
+button {
+    width: 80%;
+    max-width: 280px;
+    padding: 15px;
+    background-color: #29243a;
+    color: #eeeeee;
+    border: 1px solid #8066b5;
+    border-radius: 10px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+/* Room screens */
+#create-screen,
+#join-screen {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    padding: 20px;
+}
+
+#create-screen p {
+    color: #aaa0bc;
+}
+
+#room-code {
+    color: #b9a0ff;
+    font-size: 35px;
+    letter-spacing: 6px;
+}
+
+input {
+    width: 80%;
+    max-width: 280px;
+    padding: 15px;
+    background: #29243a;
+    color: white;
+    border: 1px solid #8066b5;
+    border-radius: 10px;
+    font-size: 18px;
+    text-align: center;
+}
+
+/* Room lobby */
+.code-box,
+.player-box {
+    width: 85%;
+    max-width: 320px;
+    padding: 20px;
+    background: #211d30;
+    border: 1px solid #51436f;
+    border-radius: 14px;
+    text-align: center;
+}
+
+#copy-code {
+    width: auto;
+    margin-top: 15px;
+    padding: 10px 20px;
+}
+
+.player-box h3 {
+    color: #b9a0ff;
+    margin-bottom: 10px;
+}
+
+.player-box p {
+    color: #eeeeee;
+}
+
+#lobby-message {
+    color: #aaa0bc;
+    text-align: center;
+}
+
+#start-game:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Center all game screens */
+#loading-screen,
+#main-menu,
+#friend-menu,
+#computer-screen,
+#symbol-screen,
+#create-screen,
+#join-screen {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    padding: 20px;
+}
+
+button {
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus,
+button:active {
+    outline: none;
+    box-shadow: none;
+}
+
+
+/* =============================
+   SYMBOL SELECTION SCREEN
+============================= */
+
+#symbol-screen {
+    min-height: 100svh;
+    height: 100svh;
+    gap: clamp(15px, 3vh, 25px);
+    overflow: hidden;
+
+    background:
+        radial-gradient(circle at 50% 35%, #29203e 0%, #12121a 65%);
+}
+
+#symbol-screen .game-label {
+    color: #a98bcf;
+    font-size: 11px;
+    letter-spacing: 4px;
+    font-weight: bold;
+}
+
+#symbol-screen h1 {
+    color: #f2e9ff;
+    font-size: clamp(28px, 8vw, 40px);
+    letter-spacing: 1px;
+}
+
+#symbol-screen > p:not(.game-label) {
+    color: #bba6d4;
+    font-size: 15px;
+    text-align: center;
+}
+
+/* X and O cards container */
+
+#symbol-options {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    width: min(85vw, 340px);
+}
+
+/* Individual symbol cards */
+
+.symbol-choice {
+    width: 50%;
+    max-width: none;
+    min-width: 0;
+
+    min-height: 155px;
+    padding: 20px 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+
+    background: linear-gradient(145deg, #302641, #211b30);
+    border: 1px solid #59446f;
+    border-radius: 18px;
+
+    transition:
+        transform 0.2s,
+        background 0.2s,
+        box-shadow 0.2s,
+        border-color 0.2s;
+}
+
+/* X card */
+
+#choose-x {
+    border-color: #8066b5;
+}
+
+#choose-x .choice-symbol {
+    color: #c9a5ff;
+    text-shadow:
+        0 0 12px #a56bff,
+        0 0 25px #a56bff88;
+}
+
+#choose-x:active {
+    background: #3b2b50;
+    border-color: #c9a5ff;
+    box-shadow:
+        0 0 15px #a56bff66,
+        0 0 30px #a56bff33;
+    transform: scale(0.96);
+}
+
+/* O card */
+
+#choose-o {
+    border-color: #956080;
+}
+
+#choose-o .choice-symbol {
+    color: #f0a9d5;
+    text-shadow:
+        0 0 12px #ed80c0,
+        0 0 25px #ed80c088;
+}
+
+#choose-o:active {
+    background: #3b2940;
+    border-color: #f0a9d5;
+    box-shadow:
+        0 0 15px #ed80c066,
+        0 0 30px #ed80c033;
+    transform: scale(0.96);
+}
+
+/* Large X and O */
+
+.choice-symbol {
+    font-size: 65px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.choice-label {
+    color: #cbb8e0;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+/* Explanation */
+
+#symbol-message {
+    max-width: 290px;
+    color: #aaa0bc;
+    font-size: 12px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* Back button */
+
+#back-symbol {
+    width: 80%;
+    max-width: 220px;
+    padding: 12px;
+
+    background: transparent;
+    border: 1px solid #51436f;
+    border-radius: 12px;
+
+    color: #b8a8c9;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+#back-symbol:active {
+    background: #302342;
+}
+
+
+/* =============================
+   PSH ARCADE GAME DESIGN
+============================= */
+
+#game-screen {
+    position: relative;
+    min-height: 100svh;
+    height: 100svh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(8px, 1.5vh, 15px);
+    padding: 10px 15px;
+    text-align: center;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 50% 35%, #29203e 0%, #12121a 65%);
+}
+
+.game-label {
+    color: #a98bcf;
+    font-size: 11px;
+    letter-spacing: 4px;
+    font-weight: bold;
+}
+
+#game-screen h1 {
+    font-size: clamp(25px, 7vw, 38px);
+    color: #f2e9ff;
+    letter-spacing: 1px;
+}
+
+/* PLAYER CARDS */
+
+#player-cards {
+    display: flex;
+    gap: 15px;
+    width: min(85vw, 330px);
+}
+
+.player-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 13px;
+    background: #211b30;
+    border: 1px solid #49375f;
+    border-radius: 14px;
+    transition: 0.2s;
+}
+
+.active-player {
+    border: 1px solid #b98aff;
+    box-shadow: 0 0 15px #9c62d455;
+    background: #302342;
+}
+
+.player-symbol {
+    font-size: 30px;
+    font-weight: bold;
+    color: #d6b5ff;
+}
+
+#player-o .player-symbol {
+    color: #f0a9d5;
+}
+
+.player-name {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #aaa0bc;
+}
+
+/* TURN MESSAGE */
+
+#turn-message {
+    color: #d9c5f2;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+/* GAME BOARD */
+
+#game-board {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+
+    width: min(82vw, 42svh, 330px);
+    height: min(82vw, 42svh, 330px);
+    flex-shrink: 0;
+
+    gap: 9px;
+    padding: 9px;
+    box-sizing: border-box;
+
+    background: #1b1728;
+    border: 1px solid #49375f;
+    border-radius: 20px;
+    box-shadow: 0 12px 35px #00000066;
+}
+
+.cell {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    max-width: none;
+    flex-shrink: 0;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(145deg, #302641, #211b30);
+    border: 1px solid #59446f;
+    border-radius: 13px;
+
+    color: #d6b5ff;
+    font-size: clamp(40px, 12vw, 58px);
+    font-weight: bold;
+    line-height: 1;
+
+    transition: background 0.2s, transform 0.15s;
+}
+
+.cell:active {
+    transform: scale(0.96);
+}
+
+.x-mark {
+    color: #c9a5ff;
+    text-shadow: 0 0 15px #a56bff;
+}
+
+.o-mark {
+    color: #f0a9d5;
+    text-shadow: 0 0 15px #ed80c0;
+}
+
+/* WINNING LINE */
+
+#winning-line {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+    display: none;
+}
+
+#win-line {
+    stroke: #e0b7ff;
+    stroke-width: 8;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 8px #b76cff);
+    stroke-dasharray: 500;
+    stroke-dashoffset: 500;
+}
+
+/* Winning line animation */
+#winning-line.animate-win #win-line {
+    animation:
+        draw-winning-line 0.55s ease-out forwards,
+        winning-line-glow 1.4s ease-in-out 0.55s infinite alternate;
+}
+
+@keyframes draw-winning-line {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes winning-line-glow {
+    from {
+        filter: drop-shadow(0 0 5px #b76cff);
+    }
+
+    to {
+        filter:
+            drop-shadow(0 0 12px #d9a6ff)
+            drop-shadow(0 0 22px #9b55ff);
+    }
+}
+
+
+/* =============================
+   VICTORY OVERLAY
+============================= */
+
+#victory-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    background: #090711bb;
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+}
+
+/* VICTORY CARD */
+
+#victory-card {
+    width: min(88vw, 340px);
+    padding: 32px 22px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+
+    background:
+        radial-gradient(circle at 50% 0%, #392750, #1c1728 70%);
+
+    border: 1px solid #8760b5;
+    border-radius: 24px;
+
+    box-shadow:
+        0 0 20px #a56bff33,
+        0 0 55px #8b4dcc22,
+        0 20px 50px #00000088;
+
+    animation: victory-card-entrance 0.45s cubic-bezier(.2, .8, .3, 1.2) both;
+}
+
+@keyframes victory-card-entrance {
+    from {
+        opacity: 0;
+        transform: scale(0.75) translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* VICTORY LABEL */
+
+.victory-label {
+    color: #b99bda;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 4px;
+}
+
+/* WINNER SYMBOL */
+
+#victory-symbol {
+    font-size: 76px;
+    font-weight: bold;
+    line-height: 1;
+    color: #c9a5ff;
+
+    text-shadow:
+        0 0 12px #a56bff,
+        0 0 30px #a56bff,
+        0 0 55px #8d4bdc;
+
+    animation: winner-symbol-pop 0.6s 0.15s cubic-bezier(.2, 1.5, .4, 1) both;
+}
+
+#victory-symbol.o-winner {
+    color: #f0a9d5;
+
+    text-shadow:
+        0 0 12px #ed80c0,
+        0 0 30px #ed80c0,
+        0 0 55px #c653a0;
+}
+
+@keyframes winner-symbol-pop {
+    from {
+        opacity: 0;
+        transform: scale(0.3) rotate(-20deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+}
+
+/* VICTORY TITLE */
+
+#victory-title {
+    color: #f2e9ff;
+    font-size: clamp(30px, 9vw, 40px);
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px #a56bff88;
+}
+
+#victory-title.o-winner {
+    color: #f0a9d5;
+    text-shadow: 0 0 15px #ed80c088;
+}
+
+/* VICTORY SUBTITLE */
+
+#victory-subtitle {
+    color: #bba6d4;
+    font-size: 12px;
+    letter-spacing: 3px;
+}
+
+/* GAME MESSAGE INSIDE VICTORY CARD */
+
+#victory-card #game-message {
+    min-height: 0;
+    color: #cbb8e0;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+/* DRAW STATE */
+
+#victory-card.draw-state #victory-symbol {
+    display: none;
+}
+
+#victory-card.draw-state #victory-title {
+    color: #d9c5f2;
+    text-shadow: 0 0 15px #a56bff66;
+}
+
+/* VICTORY BUTTONS */
+
+#victory-card #rematch-button {
+    width: 100%;
+    max-width: none;
+    margin-top: 8px;
+    padding: 16px;
+
+    background: linear-gradient(135deg, #9564cf, #633c91);
+    border: 1px solid #b88ae9;
+    border-radius: 13px;
+
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 3px;
+
+    box-shadow:
+        0 5px 18px #7955a566,
+        0 0 15px #a56bff33;
+
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#victory-card #rematch-button:active {
+    transform: scale(0.96);
+    box-shadow: 0 2px 8px #7955a544;
+}
+
+#victory-card #back-game {
+    width: 100%;
+    max-width: none;
+    padding: 12px;
+
+    background: transparent;
+    border: 1px solid #51436f;
+    border-radius: 12px;
+
+    color: #b8a8c9;
+    font-size: 12px;
+    letter-spacing: 2px;
+
+    transition: background 0.2s, color 0.2s;
+}
+
+#victory-card #back-game:active {
+    background: #302342;
+    color: #eeeeee;
+}
+
+
+/* ORIGINAL GAME BUTTON STYLES */
+
+#rematch-button {
+    background: linear-gradient(135deg, #7955a5, #51356f);
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    box-shadow: 0 5px 18px #7955a544;
+}
+
+#back-game {
+    background: transparent;
+    border: none;
+    color: #a99ab9;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+
+/* TITLE SPACING FIX */
+
+#loading-screen h1,
+#main-menu h1 {
+    font-family: "Courier New", monospace !important;
+    letter-spacing: 0 !important;
+    word-spacing: 0 !important;
+    white-space: nowrap;
+}
+
+/* Separate Back button from difficulty options */
+#back-computer {
+    margin-top: 20px;
+}
+
+#back-friend {
+    margin-top: 20px;
+}
+
+  
+
+/* =============================
+   BLUE PSH ARCADE THEME
+============================= */
+
+/* Main accent */
+h1,
+#room-code,
+.player-box h3 {
+    color: #7dcaff;
+}
+
+/* Loading */
+.loading-bar {
+    background-color: #172c42;
+}
+
+#progress {
+    background-color: #45b8ff;
+    box-shadow: 0 0 12px #45b8ff;
+}
+
+#loading-screen p,
+#create-screen p,
+#lobby-message {
+    color: #91b8d4;
+}
+
+/* Buttons and inputs */
+button {
+    background-color: #172b40;
+    border-color: #367eae;
+}
+
+input {
+    background: #172b40;
+    border-color: #367eae;
+}
+
+/* Room lobby */
+.code-box,
+.player-box {
+    background: #111f30;
+    border-color: #285477;
+}
+
+.player-box h3 {
+    color: #7dcaff;
+}
+
+/* Symbol selection */
+#symbol-screen,
+#game-screen {
+    background:
+        radial-gradient(circle at 50% 35%, #183957 0%, #0b1420 65%);
+}
+
+#symbol-screen .game-label,
+.game-label {
+    color: #69bfff;
+}
+
+#symbol-screen h1,
+#game-screen h1 {
+    color: #e5f5ff;
+}
+
+#symbol-screen > p:not(.game-label) {
+    color: #a9d5f0;
+}
+
+.symbol-choice {
+    background: linear-gradient(145deg, #1c3b57, #14283c);
+    border-color: #315c7d;
+}
+
+#choose-x {
+    border-color: #3b9bd4;
+}
+
+#choose-x .choice-symbol {
+    color: #72caff;
+    text-shadow: 0 0 12px #39aaff, 0 0 25px #39aaff88;
+}
+
+#choose-x:active {
+    background: #204a6b;
+    border-color: #72caff;
+    box-shadow: 0 0 15px #39aaff66, 0 0 30px #39aaff33;
+}
+
+.choice-label {
+    color: #b6d9ef;
+}
+
+#symbol-message {
+    color: #91b8d4;
+}
+
+#back-symbol,
+#victory-card #back-game {
+    border-color: #315c7d;
+    color: #9bc9e8;
+}
+
+#back-symbol:active,
+#victory-card #back-game:active {
+    background: #1c3b57;
+}
+
+/* Player cards */
+.player-card {
+    background: #14283c;
+    border-color: #285477;
+}
+
+.active-player {
+    border-color: #65c5ff;
+    box-shadow: 0 0 15px #39aaff55;
+    background: #1c3b57;
+}
+
+.player-symbol {
+    color: #72caff;
+}
+
+.player-name {
+    color: #91b8d4;
+}
+
+#turn-message {
+    color: #c5e8ff;
+}
+
+/* Game board */
+#game-board {
+    background: #101f30;
+    border-color: #285477;
+}
+
+.cell {
+    background: linear-gradient(145deg, #1c3b57, #14283c);
+    border-color: #315c7d;
+    color: #72caff;
+}
+
+.x-mark {
+    color: #72caff;
+    text-shadow: 0 0 15px #39aaff;
+}
+
+/* Winning line */
+#win-line {
+    stroke: #8bd8ff;
+    filter: drop-shadow(0 0 8px #39aaff);
+}
+
+@keyframes winning-line-glow {
+    from {
+        filter: drop-shadow(0 0 5px #39aaff);
+    }
+
+    to {
+        filter:
+            drop-shadow(0 0 12px #8bd8ff)
+            drop-shadow(0 0 22px #168cff);
+    }
+}
+
+/* Victory screen */
+#victory-card {
+    background:
+        radial-gradient(circle at 50% 0%, #204768, #111f30 70%);
+    border-color: #3987b8;
+    box-shadow:
+        0 0 20px #39aaff33,
+        0 0 55px #168cff22,
+        0 20px 50px #00000088;
+}
+
+  
+/* =================================
+   NEON ELECTRIC BLUE THEME
+================================= */
+
+:root {
+    --neon: #00b7ff;
+    --cyan: #00e5ff;
+    --deep-blue: #06111f;
+    --navy: #0a1c30;
+    --glow: #008cff;
+}
+
+/* Background */
+body {
+    background: #030914;
+    color: #e5f7ff;
+}
+
+/* Main screens */
+#loading-screen,
+#main-menu,
+#friend-menu,
+#computer-screen,
+#create-screen,
+#join-screen {
+    background:
+        radial-gradient(ellipse at 50% 35%, #102c49 0%, #06111f 55%, #030914 100%);
+}
+
+/* Titles */
+h1 {
+    color: #eafaff;
+    text-shadow:
+        0 0 5px var(--cyan),
+        0 0 15px var(--neon),
+        0 0 35px var(--glow);
+}
+
+/* Neon buttons */
+button {
+    background: linear-gradient(145deg, #102b46, #071729);
+    color: #d9f5ff;
+    border: 1px solid var(--neon);
+    box-shadow:
+        0 0 6px #00b7ff66,
+        inset 0 0 8px #00b7ff22;
+    transition: 0.2s ease;
+}
+
+button:active {
+    background: #06416a;
+    box-shadow:
+        0 0 10px var(--cyan),
+        0 0 25px var(--neon);
+    transform: scale(0.97);
+}
+
+/* Loading bar */
+.loading-bar {
+    background: #0b2035;
+    border: 1px solid #15527a;
+}
+
+#progress {
+    background: linear-gradient(90deg, #007bff, #00e5ff);
+    box-shadow:
+        0 0 10px var(--neon),
+        0 0 25px var(--cyan);
+}
+
+/* Text accents */
+.game-label,
+#room-code,
+.player-box h3 {
+    color: var(--cyan);
+    text-shadow: 0 0 12px var(--neon);
+}
+
+p {
+    color: #a9d8f2;
+}
+
+/* Inputs and room cards */
+input,
+.code-box,
+.player-box {
+    background: #071729;
+    color: #e5f7ff;
+    border-color: #087fbd;
+    box-shadow: 0 0 10px #008cff22;
+}
+
+/* Symbol selection and game screens */
+#symbol-screen,
+#game-screen {
+    background:
+        radial-gradient(circle at 50% 35%, #10365a 0%, #071729 55%, #030914 100%);
+}
+
+/* Symbol cards */
+.symbol-choice,
+.player-card {
+    background: linear-gradient(145deg, #102c49, #071729);
+    border: 1px solid #087fbd;
+    box-shadow: 0 0 12px #008cff33;
+}
+
+.active-player {
+    border-color: var(--cyan);
+    box-shadow:
+        0 0 10px var(--cyan),
+        0 0 25px #008cff88;
+}
+
+/* X and O */
+.x-mark,
+#choose-x .choice-symbol {
+    color: #00c8ff;
+    text-shadow:
+        0 0 8px #00b7ff,
+        0 0 20px #008cff,
+        0 0 40px #008cff;
+}
+
+.o-mark,
+#choose-o .choice-symbol {
+    color: #a855ff;
+    text-shadow:
+        0 0 8px #a855ff,
+        0 0 20px #7b2cff,
+        0 0 40px #7b2cff;
+}
+
+/* Game board */
+#game-board {
+    background: #030d19;
+    border: 2px solid var(--neon);
+    box-shadow:
+        0 0 12px #008cff88,
+        0 0 30px #008cff55,
+        inset 0 0 20px #008cff22;
+}
+
+.cell {
+    background: linear-gradient(145deg, #102b46, #071729);
+    border-color: #087fbd;
+}
+
+/* Winning line */
+#win-line {
+    stroke: #00e5ff;
+    filter: drop-shadow(0 0 8px #00b7ff)
+            drop-shadow(0 0 18px #008cff);
+}
+
+/* Victory card */
+#victory-card {
+    background:
+        radial-gradient(circle at 50% 0%, #16466b, #071729 75%);
+    border: 1px solid var(--cyan);
+    box-shadow:
+        0 0 15px #00b7ff88,
+        0 0 45px #008cff55,
+        0 0 90px #008cff22;
+}
+
+#victory-title,
+#victory-symbol {
+    text-shadow:
+        0 0 10px var(--cyan),
+        0 0 25px var(--neon),
+        0 0 45px var(--glow);
+}
+
+#rematch-button {
+    background: linear-gradient(135deg, #008cff, #0054b8);
+    border-color: var(--cyan);
+    box-shadow:
+        0 0 12px #008cff88,
+        0 0 25px #008cff55;
+}
+
+  #room-status {
+    margin-top: 10px;
+    color: #00d9ff;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  #room-status {
+    margin-top: 10px;
+    color: #00d9ff;
+    font-size: 14px;
+    text-align: center;
+}
+
+  
+    
+/* =================================
+   MULTIPLAYER ROOM LOBBY
+================================= */
+
+/* Entire lobby fits inside the phone screen */
+#create-screen {
+    width: 100%;
+    height: 100svh;
+    min-height: 0;
+    padding: 14px 18px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: clamp(9px, 1.6vh, 14px);
+
+    overflow: hidden;
+    text-align: center;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 30%,
+            #102c49 0%,
+            #06111f 60%,
+            #030914 100%
+        );
+}
+
+/* Heading */
+#create-screen > h1 {
+    font-size: clamp(27px, 7vw, 36px);
+    line-height: 1.1;
+    margin: 0;
+}
+
+/* Subtitle */
+#create-screen > p:not(#lobby-message) {
+    margin: 0;
+    font-size: 13px;
+    color: #91b8d4;
+}
+
+/* =================================
+   ROOM CODE BOX
+================================= */
+
+#create-screen .code-box {
+    width: 100%;
+    max-width: 380px;
+    padding: 15px 14px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    background: linear-gradient(145deg, #102b46, #071729);
+    border: 1px solid #00b7ff;
+    border-radius: 18px;
+
+    box-shadow:
+        0 0 12px #008cff44,
+        inset 0 0 15px #008cff11;
+}
+
+#create-screen .room-code-label {
+    margin: 0;
+    color: #91b8d4;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+#create-screen #room-code {
+    margin: 0;
+    color: #00d9ff;
+    font-size: clamp(32px, 9vw, 42px);
+    letter-spacing: 7px;
+    line-height: 1.1;
+}
+
+#create-screen #room-status {
+    margin: 0;
+    color: #00d9ff;
+    font-size: 11px;
+    text-align: center;
+}
+
+#create-screen #copy-code {
+    width: 100%;
+    max-width: 210px;
+    margin: 2px 0 0;
+    padding: 10px;
+    font-size: 13px;
+}
+
+/* =================================
+   PLAYER CARDS
+================================= */
+
+#lobby-players {
+    width: 100%;
+    max-width: 380px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+
+    gap: 12px;
+}
+
+#create-screen #lobby-players .player-box {
+    flex: 1;
+    width: 50%;
+    min-width: 0;
+    max-width: none;
+    min-height: 118px;
+
+    padding: 12px 6px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 6px;
+
+    background: linear-gradient(145deg, #102b46, #071729);
+    border: 1px solid #087fbd;
+    border-radius: 16px;
+
+    box-shadow: 0 0 12px #008cff22;
+}
+
+/* Large X and O */
+.lobby-symbol {
+    font-size: 38px;
+    line-height: 1;
+    font-weight: bold;
+    color: #00c8ff;
+
+    text-shadow:
+        0 0 8px #00b7ff,
+        0 0 20px #008cff;
+}
+
+#lobby-players .player-box:nth-child(2) .lobby-symbol {
+    color: #a855ff;
+
+    text-shadow:
+        0 0 8px #a855ff,
+        0 0 20px #7b2cff;
+}
+
+/* YOU / YOUR FRIEND */
+#create-screen #lobby-players .player-box h3 {
+    margin: 0;
+    color: #e5f7ff;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+/* HOST / WAITING badges */
+.player-badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+.host-badge {
+    color: #00e5ff;
+    background: #00b7ff22;
+    border: 1px solid #00b7ff88;
+}
+
+.waiting-badge {
+    color: #b8c8d8;
+    background: #71809622;
+    border: 1px solid #71809666;
+}
+
+/* =================================
+   WAITING MESSAGE
+================================= */
+
+#create-screen #lobby-message {
+    margin: 0;
+    padding: 0;
+
+    color: #91b8d4;
+    font-size: 11px;
+    line-height: 1.3;
+    text-align: center;
+}
+
+/* =================================
+   START GAME AND BACK
+================================= */
+
+#create-screen #start-game,
+#create-screen #back-create {
+    width: 100%;
+    max-width: 320px;
+    margin: 0;
+    padding: 12px;
+
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+#create-screen #start-game:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+#create-screen #back-create {
+    background: transparent;
+    border: 1px solid #087fbd;
+    color: #9bc9e8;
+    box-shadow: none;
+}
+
+/* =================================
+   SHORT PHONE SCREENS
+================================= */
+
+@media (max-height: 650px) {
+
+    #create-screen {
+        gap: 7px;
+        padding: 8px 16px;
+    }
+
+    #create-screen .code-box {
+        padding: 10px;
+        gap: 5px;
+    }
+
+    #create-screen #copy-code {
+        padding: 8px;
+    }
+
+    #create-screen #lobby-players .player-box {
+        min-height: 95px;
+        padding: 8px 5px;
+    }
+
+    .lobby-symbol {
+        font-size: 30px;
+    }
+
+    #create-screen #start-game,
+    #create-screen #back-create {
+        padding: 9px;
+    }
+}
+
+#submit-code:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+  /* JOIN ROOM STATUS */
+#join-status {
+    min-height: 18px;
+    margin: 0;
+    color: #00d9ff;
+    font-size: 13px;
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* LOBBY SUBTITLE */
+#lobby-subtitle {
+    color: #aabbd0;
+    font-size: 13px;
+    text-align: center;
+    margin: 0;
+}
+
+/* HOST AND GUEST LABELS */
+#host-badge,
+#friend-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 65px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* HOST BADGE */
+#host-badge {
+    color: #00d9ff;
+    background: rgba(0, 217, 255, 0.12);
+    border: 1px solid rgba(0, 217, 255, 0.4);
+}
+
+/* FRIEND WAITING STATUS */
+#friend-status {
+    color: #aabbd0;
+    background: rgba(170, 187, 208, 0.1);
+    border: 1px solid rgba(170, 187, 208, 0.2);
+}
+
+  #join-screen #join-status {
+    margin: -18px 0;
+    min-height: 14px;
+  }
+
+  /* =============================
+   FINAL VICTORY SCREEN BLUE FIX
+============================= */
+
+#victory-card .victory-label {
+    color: #00e5ff;
+    text-shadow: 0 0 12px #00b7ff;
+}
+
+#victory-card #victory-title,
+#victory-card.draw-state #victory-title {
+    color: #eafaff;
+    text-shadow:
+        0 0 10px #00e5ff,
+        0 0 25px #00b7ff;
+}
+
+#victory-card #victory-subtitle {
+    color: #a9d8f2;
+}
+
+#victory-card #game-message {
+    color: #c5e8ff;
+}
+
+#victory-card #rematch-button {
+    background: linear-gradient(135deg, #008cff, #0054b8);
+    border: 1px solid #00e5ff;
+    color: #ffffff;
+    box-shadow:
+        0 0 12px #008cff88,
+        0 0 25px #008cff55;
+}
+
+#victory-card #rematch-button:active {
+    background: #06416a;
+    box-shadow: 0 0 15px #00e5ff;
+}
+
+#victory-card #back-game {
+    color: #a9d8f2;
+    border-color: #087fbd;
+}
+
+  /* WINNER X/O SYMBOL — NEON BLUE */
+
+#victory-card #victory-symbol,
+#victory-card #victory-symbol.o-winner {
+    color: #00c8ff;
+    text-shadow:
+        0 0 12px #00b7ff,
+        0 0 30px #008cff,
+        0 0 55px #008cff;
+}
+
+  /* REMATCH BUTTON — MATCH THE NEON THEME */
+
+#victory-card #rematch-button {
+    background: linear-gradient(145deg, #087fc5, #06416a);
+    color: #eafaff;
+    border: 1px solid #00e5ff;
+
+    box-shadow:
+        0 0 8px #00b7ff99,
+        0 0 18px #008cff77,
+        0 0 32px #008cff44,
+        inset 0 0 10px #00e5ff33;
+
+    transition: 0.2s ease;
+}
+
+#victory-card #rematch-button:active {
+    background: #087fc5;
+    transform: scale(0.97);
+
+    box-shadow:
+        0 0 12px #00e5ff,
+        0 0 25px #00b7ff,
+        0 0 45px #008cff;
+}
+
+  .cell:disabled {
+    cursor: not-allowed;
+    opacity: 1;
+  }
+
+  /* Purple O winner */
+#victory-card #victory-symbol.o-winner {
+    color: #c084fc;
+    text-shadow:
+        0 0 12px #a855f7,
+        0 0 28px #9333ea,
+        0 0 50px #7e22ce;
+}
